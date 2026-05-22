@@ -1,5 +1,21 @@
-import { education, certifications } from "../data/portfolioData";
+import { educationList, certifications } from "../data/portfolioData";
 import SectionHeader from "./SectionHeader";
+
+function formatEducationDetails(entry) {
+  const parts = [];
+
+  if (entry.field) {
+    parts.push(entry.field);
+  }
+
+  parts.push(`${entry.scoreLabel}: ${entry.score}`);
+
+  if (entry.year) {
+    parts.push(entry.year);
+  }
+
+  return parts.join(" | ");
+}
 
 function Education() {
   return (
@@ -12,25 +28,25 @@ function Education() {
               Academic <span>background</span>
             </>
           }
-          subtitle="Strong fundamentals with a specialization in AI and machine learning."
+          subtitle="Academic record from undergraduate studies through school."
         />
 
-        <article className="education__card">
-          <div className="education__main">
-            <h3>{education.degree}</h3>
-            <p className="education__institution">{education.institution}</p>
-          </div>
-          <dl className="education__meta">
-            <div>
-              <dt>CGPA</dt>
-              <dd>{education.cgpa}</dd>
-            </div>
-            <div>
-              <dt>Graduation</dt>
-              <dd>{education.graduationYear}</dd>
-            </div>
-          </dl>
-        </article>
+        <ul className="education__list">
+          {educationList.map((entry) => (
+            <li
+              key={entry.id}
+              className={`education__item ${entry.primary ? "education__item--primary" : ""}`}
+            >
+              <h3 className="education__headline">
+                <span className="education__level">{entry.level}</span>
+                <span className="education__school">{entry.institution}</span>
+              </h3>
+              <p className="education__details">
+                {formatEducationDetails(entry)}
+              </p>
+            </li>
+          ))}
+        </ul>
 
         <div className="education__certs" id="certifications">
           <h3 className="education__certs-title">Certifications</h3>

@@ -12,7 +12,12 @@ function Hero() {
         <div className="hero__content">
           <p className="hero__greeting">Hello, I'm</p>
 
-          <h1 className="hero__title">{personalInfo.fullName}</h1>
+          <h1 className="hero__title">
+            <span className="hero__title-line">{personalInfo.nameLine1}</span>
+            <span className="hero__title-line hero__title-line--accent">
+              {personalInfo.nameLine2}
+            </span>
+          </h1>
 
           <p className="hero__role">{personalInfo.role}</p>
 
